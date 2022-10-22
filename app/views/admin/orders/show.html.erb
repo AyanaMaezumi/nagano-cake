@@ -1,0 +1,15 @@
+注文履歴詳細
+
+購入者<%= @customer.last_name %> <%= @customer.first_name %><br>
+
+注文日<%= @customer.orders.created_at %> <br>
+
+配送先<%= @customer.addresses.address %><br>
+
+支払方法<%= @customer.orders.payment_method %><br>
+
+<%= form_with model: @customer,url: admin_order_path do |f| %>
+注文ステータス<%= f.collection_select(:order_status, @order, :id, :order_status) %><br>
+
+<%= f.submit '更新', class:"btn btn-success" %>
+<% end %>

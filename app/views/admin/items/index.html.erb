@@ -1,0 +1,33 @@
+商品一覧
+
+<table class="table">
+<thead class="table-light">
+  <th>商品id</th>
+  <th>商品名</th>
+  <th>税抜き価格</th>
+  <th>ジャンル</th>
+  <th>ステータス</th>
+</thead>
+<tbody>
+<% @items.each  do |items| %>
+
+<tr>
+<td><%= items.id %></td>
+<td><%= items.name %></td>
+<td><%= items.price %></td>
+<td><%= items.genre.name %></td>
+
+<td>
+<% if items.is_active==true %>
+販売中
+<% else %>
+販売停止中
+<% end %>
+</td>
+</tr>
+
+<% end %>
+</tbody>
+</table>
+
+<%= paginate @items %>

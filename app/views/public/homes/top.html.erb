@@ -1,0 +1,23 @@
+ジャンル検索
+<% @genres.each do |genres| %>
+
+<%= genres.name %>
+
+<% end %>
+
+ようこそ、ながのCAKEへ！<br>
+このサイトは、ケーキ販売のECサイトになります。<br>
+会員でない方も商品の閲覧はできますが、<br>
+購入には会員登録が必要になります。<br>
+
+
+新着商品
+<% @items.each do |items| %>
+  <%= link_to item_path(items.id) do%>
+  <%= image_tag items.get_image(100,100) %>
+  <%= items.name %>
+  <%= items.price %>
+  <% end %>
+<% end %>
+
+<%# link_to "全ての商品を見る>",  %>

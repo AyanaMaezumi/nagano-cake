@@ -1,0 +1,25 @@
+商品詳細
+
+<%= image_tag @item.get_image(100,100) %>
+
+商品名
+<%= @item.name %>
+
+商品説明
+<%= @item.introduction %>
+
+ジャンル
+<%= @item.genre.name %>
+
+税込価格（税抜価格）
+<%= @item.total_price %>(<%= @item.price %>)円
+
+
+販売ステータス
+<% if @item.is_active==true %>
+販売中
+<% else %>
+販売停止中
+<% end %>
+
+<%= link_to "編集する", edit_admin_item_path(@item) ,class:"btn btn-success" %>
