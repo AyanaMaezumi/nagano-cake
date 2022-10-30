@@ -1,7 +1,6 @@
-<h2>新規会員登録</h2>
+<h2>会員情報編集</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
+<%= form_with model: @customer, url:customers_update_path do |f| %>
 
 
   <div class="field">
@@ -43,24 +42,11 @@
     <%= f.text_field :telephone_number %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  <div class="actions">
+    <%= f.submit "編集内容を保存" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "新規登録" %>
+    <%= link_to "退会する" %>
   </div>
 <% end %>
-
-
-既に登録済みの方
-<%= link_to "こちら",new_customer_session_path %> からログインしてください。

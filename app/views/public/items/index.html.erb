@@ -1,0 +1,12 @@
+<h2>商品一覧</h2>
+
+
+<% @items.each  do |items| %>
+
+<%= image_tag items.get_image(100,100) %><br>
+<%= items.name %><br>
+<%= items.price %>
+
+<% end %>
+
+<%= paginate @items %>

@@ -1,0 +1,9 @@
+<%= image_tag items.get_image(100,100) %>
+
+<%= @item.name %>
+<%= @item.introduction %>
+<%= @item.total_price %>（税込）
+
+<%= f.collection_select(:genre_id, @genres, {prompt: "個数選択"}) %>
+
+<%=  link_to "カートに入れる", cart_items_path, class:"btn btn-success" %>
