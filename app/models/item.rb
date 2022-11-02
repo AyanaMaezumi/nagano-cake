@@ -14,7 +14,7 @@ class Item < ApplicationRecord
    has_many :order_details
    belongs_to :genre
 
-def total_price
+def tax_price
   (price * 1.1).floor
 end
 

@@ -1,7 +1,8 @@
 <h2>商品一覧</h2>
+（全<%= @items.count %>件）
 
 
-<% @items.each  do |items| %>
+<% @items.each do |items| %>
 
 <%= image_tag items.get_image(100,100) %><br>
 <%= items.name %><br>

@@ -1,0 +1,31 @@
+ショッピングカート　<%= link_to 'カートを空にする',cart_items_destroy_all_path, method: :delete, class:"btn btn-danger" %>
+
+
+<table>
+ <tr>
+    <th>商品名</th>
+    <th>単価(税込)</th>
+    <th>数量</th>
+    <th>小計</th>
+    <th></th>
+  </tr>
+  <% @cart_items.each do |cart_items| %>
+  <tr>
+    <td><%= image_tag cart_items.item.get_image(100,100) %><%= cart_items.item.name %></td>
+    <td><%= cart_items.tax_price %></td>
+    <td>
+    <%= form_with model: cart_items,url: cart_item_path(cart_items.id) , method: :patch do |f| %>
+    <%= f.select :amount, *[1..5] %><%= f.submit '変更', class:"btn btn-danger" %>
+    <% end %>
+    </td>
+    <td><%= cart_items.subtotal %></td>
+    <% @total_price = @total_price + cart_items.subtotal %>
+    <td><%= link_to '削除する',cart_item_path(cart_items.id), method: :delete, class:"btn btn-danger" %></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= link_to '買い物を続ける',root_path, class:"btn btn-primary" %>
+<table><tr><td>合計金額</td><td><%= @total_price %></td></tr></table>
+
+<%#= link_to '情報入力に進む',_path, class:"btn btn-primary" %>

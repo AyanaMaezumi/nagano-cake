@@ -16,11 +16,15 @@ Rails.application.routes.draw do
     resources :items
     resources :orders
     resources :addresses
-    resources :cart_items
 
     get 'customers/show'
     get 'customers/edit'
     patch 'customers/update'
+
+    delete '/cart_items/destroy_all' => "cart_items#destroy_all"
+    resources :cart_items
+
+
 
     #退会確認画面
     get '/customers/unsubscribe' => 'customers#unsubscribe' , as: 'unsubscribe'
