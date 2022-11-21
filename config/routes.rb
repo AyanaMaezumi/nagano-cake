@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :items
     resources :customers
     resources :orders
+    patch "/order_details/:id" => "order_details#update", as:"detail_update"
   end
 
   scope module: :public do
@@ -14,15 +15,21 @@ Rails.application.routes.draw do
     get "/about" => "homes#about", as:"about"
     # get URL => "コントローラ名#アクション名"
     resources :items
+    get "/orders/complete" => "orders#complete"
     resources :orders
+    post "/orders/confirm" => "orders#confirm"
+
     resources :addresses
 
     get 'customers/show'
     get 'customers/edit'
     patch 'customers/update'
+    get '/customers/unsubscribe'
+    patch '/customers/withdraw'
 
     delete '/cart_items/destroy_all' => "cart_items#destroy_all"
     resources :cart_items
+
 
 
 

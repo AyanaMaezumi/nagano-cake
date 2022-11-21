@@ -11,17 +11,13 @@
 <% @orders.each  do |orders| %>
 
 <tr>
-<td><%= orders.created_at %></td>
-<td><%= orders.customers.last_name %><%= orders.customers.first_name %></td>
-<td><%= orders.order_details.quantity %></td>
-<td><%= orders.order_status %></td>
-
-<td>
-<% if items.is_active==true %>
-販売中
-<% else %>
-販売停止中
-<% end %>
+<td><%= link_to admin_order_path(orders.id) do %>
+    <%= orders.created_at %>
+    <% end %>
+</td>
+<td><%= orders.customer.last_name %><%= orders.customer.first_name %></td>
+<td><%= orders.order_details.sum(:quantity) %></td>
+<td><%= orders.order_status_i18n %></td>
 </td>
 </tr>
 

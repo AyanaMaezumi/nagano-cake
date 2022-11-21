@@ -1,21 +1,17 @@
-商品詳細
+<h3>商品詳細</h3>
 
 <%= image_tag @item.get_image(100,100) %>
 
-商品名
-<%= @item.name %>
+<h5>商品名</h5> <%= @item.name %><br>
 
-商品説明
-<%= @item.introduction %>
+<h5>商品説明</h5> <%= @item.introduction %><br>
 
-ジャンル
-<%= @item.genre.name %>
+<h5>ジャンル</h5> <%= @item.genre.name %><br>
 
-税込価格（税抜価格）
-<%= @item.tax_price %>(<%= @item.price %>)円
+<h5>税込価格（税抜価格）</h5> <%= @item.tax_price %>(<%= @item.price %>)円<br>
 
 
-販売ステータス
+<h5>販売ステータス</h5>
 <% if @item.is_active==true %>
 販売中
 <% else %>

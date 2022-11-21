@@ -1,15 +1,57 @@
-注文履歴詳細
+<h4>注文履歴詳細</h4>
 
-購入者<%= @customer.last_name %> <%= @customer.first_name %><br>
+購入者
+<%= link_to admin_customer_path(@customer.id) do %>
+<%= @customer.last_name %> <%= @customer.first_name %>
+<% end %><br>
 
-注文日<%= @customer.orders.created_at %> <br>
+注文日<%= @order.created_at %><br>
 
-配送先<%= @customer.addresses.address %><br>
+配送先<%= @order.address %><br>
 
-支払方法<%= @customer.orders.payment_method %><br>
+支払方法 <%= @order.payment_method_i18n %><br>
 
-<%= form_with model: @customer,url: admin_order_path do |f| %>
-注文ステータス<%= f.collection_select(:order_status, @order, :id, :order_status) %><br>
+<%= form_with model: @order,url: admin_order_path do |f| %>
+
+注文ステータス<br><%= f.select :order_status, Order.order_statuses_i18n.keys.map {|k| [I18n.t("enums.order.order_status.#{k}"),k]} %>
+
 
 <%= f.submit '更新', class:"btn btn-success" %>
 <% end %>
+
+<table>
+ <% @order_details.each do |order_detail| %>
+ <tr>
+    <th>商品名</th>
+    <th>単価（税込）</th>
+    <th>数量</th>
+    <th>小計</th>
+    <th>製作ステータス</th>
+  </tr>
+  <tr>
+    <td><%= order_detail.item.name %></td>
+    <td><%= order_detail.item.tax_price %></td>
+    <td><%= order_detail.quantity %></td>
+    <td><%= order_detail.subtotal %></td>
+    <td><%= form_with model: order_detail,url: admin_detail_update_path(order_detail) do |f| %>
+        <!--invert 数字→英語してくれる。_i18n 英語を日本語にしてくれる　-->
+        <%= f.select :production_status, OrderDetail.production_statuses_i18n.invert, {}, placeholder: 0 %>
+        <%= f.submit '更新', class:"btn btn-success" %>
+        <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+<table>
+  <tr>
+    <th>商品合計</th>
+    <th>送料</th>
+    <th>請求金額合計</th>
+  </tr>
+  <tr>
+    <td><%= @order.payment - @order.postage %>円</td>
+    <td><%= @order.postage %>円</td>
+    <td><%= @order.payment %>円</td>
+  </tr>
+</table>

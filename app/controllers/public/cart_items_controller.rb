@@ -6,9 +6,16 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
-    cart_items = CartItem.new(cart_item_params)
-    cart_items.save
-    redirect_to '/cart_items/'
+    if current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id]).present?
+     @cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
+     @cart_item.amount += params[:cart_item][:amount].to_i
+     @cart_item.save
+     redirect_to '/cart_items/'
+    else
+     cart_items = CartItem.new(cart_item_params)
+     cart_items.save
+     redirect_to '/cart_items/'
+    end
   end
 
 
